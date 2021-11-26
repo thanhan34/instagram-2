@@ -39,7 +39,7 @@ function Header() {
                     <PlusCircleIcon className="navBtn" />
                     <UserGroupIcon className="navBtn" />
                     <HeartIcon className="navBtn" />
-                    <img src="https://scontent.fbne5-1.fna.fbcdn.net/v/t1.6435-9/182530552_10219335066316174_4076270653074423572_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=hbRmQhXtbrkAX-mgzdD&_nc_ht=scontent.fbne5-1.fna&oh=6d5b6059d3ff9a20b049d46cd523011e&oe=61C3EC1F" alt="" class="h-10 rounded-full cursor-pointer" />
+                    <img src="https://scontent.fbne5-1.fna.fbcdn.net/v/t1.6435-9/182530552_10219335066316174_4076270653074423572_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=hbRmQhXtbrkAX-mgzdD&_nc_ht=scontent.fbne5-1.fna&oh=6d5b6059d3ff9a20b049d46cd523011e&oe=61C3EC1F" alt="" className="h-10 rounded-full cursor-pointer" />
                 </div>
 
             </div>

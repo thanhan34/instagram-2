@@ -1,36 +1,19 @@
+import { collection, onSnapshot, orderBy, query } from "@firebase/firestore"
+import { useEffect, useState } from "react"
+import { db } from "../firebase"
 import Post from "./Post"
-const posts = [
-    {
-        id: 123,
-        username: "An Doan",
-        useImg: "https://scontent.fbne5-1.fna.fbcdn.net/v/t1.6435-9/182530552_10219335066316174_4076270653074423572_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=hbRmQhXtbrkAX-mgzdD&_nc_ht=scontent.fbne5-1.fna&oh=6d5b6059d3ff9a20b049d46cd523011e&oe=61C3EC1F",
-        img: "https://scontent.fbne5-1.fna.fbcdn.net/v/t1.6435-9/182530552_10219335066316174_4076270653074423572_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=hbRmQhXtbrkAX-mgzdD&_nc_ht=scontent.fbne5-1.fna&oh=6d5b6059d3ff9a20b049d46cd523011e&oe=61C3EC1F",
-        caption: "Hello I am a super man in the Earth"
-    },
-    {
-        id: 1233,
-        username: "An Doan",
-        useImg: "https://scontent.fbne5-1.fna.fbcdn.net/v/t1.6435-9/182530552_10219335066316174_4076270653074423572_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=hbRmQhXtbrkAX-mgzdD&_nc_ht=scontent.fbne5-1.fna&oh=6d5b6059d3ff9a20b049d46cd523011e&oe=61C3EC1F",
-        img: "https://scontent.fbne5-1.fna.fbcdn.net/v/t1.6435-9/182530552_10219335066316174_4076270653074423572_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=hbRmQhXtbrkAX-mgzdD&_nc_ht=scontent.fbne5-1.fna&oh=6d5b6059d3ff9a20b049d46cd523011e&oe=61C3EC1F",
-        caption: "Hello I am a super man in the Earth"
-    },
-    {
-        id: 1243,
-        username: "An Doan",
-        useImg: "https://scontent.fbne5-1.fna.fbcdn.net/v/t1.6435-9/182530552_10219335066316174_4076270653074423572_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=hbRmQhXtbrkAX-mgzdD&_nc_ht=scontent.fbne5-1.fna&oh=6d5b6059d3ff9a20b049d46cd523011e&oe=61C3EC1F",
-        img: "https://scontent.fbne5-1.fna.fbcdn.net/v/t1.6435-9/182530552_10219335066316174_4076270653074423572_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=hbRmQhXtbrkAX-mgzdD&_nc_ht=scontent.fbne5-1.fna&oh=6d5b6059d3ff9a20b049d46cd523011e&oe=61C3EC1F",
-        caption: "Hello I am a super man in the Earth"
-    },
-    {
-        id: 1253,
-        username: "An Doan",
-        useImg: "https://scontent.fbne5-1.fna.fbcdn.net/v/t1.6435-9/182530552_10219335066316174_4076270653074423572_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=hbRmQhXtbrkAX-mgzdD&_nc_ht=scontent.fbne5-1.fna&oh=6d5b6059d3ff9a20b049d46cd523011e&oe=61C3EC1F",
-        img: "https://scontent.fbne5-1.fna.fbcdn.net/v/t1.6435-9/182530552_10219335066316174_4076270653074423572_n.jpg?_nc_cat=109&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=hbRmQhXtbrkAX-mgzdD&_nc_ht=scontent.fbne5-1.fna&oh=6d5b6059d3ff9a20b049d46cd523011e&oe=61C3EC1F",
-        caption: "Hello I am a super man in the Earth"
-    },
-]
+
 
 function Posts() {
+    const [posts, setPosts] = useState([])
+    useEffect(() => onSnapshot(
+        query(collection(db, "posts"), orderBy("timestamp", "desc")),
+        (snapshot) => {
+            setPosts(snapshot.docs)
+        }),
+        [db]
+    )
+    console.log(posts)
     return (
         <div>
             {
@@ -39,10 +22,10 @@ function Posts() {
                     <Post
                         key={post.id}
                         id={post.id}
-                        username={post.username}
-                        useImg={post.useImg}
-                        img={post.img}
-                        caption={post.caption}
+                        username={post.data().username}
+                        useImg={post.data().profileImg}
+                        img={post.data().image}
+                        caption={post.data().caption}
                     />
                 ))
             }

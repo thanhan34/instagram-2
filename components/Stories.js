@@ -3,8 +3,6 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Story from "./Story";
 function Stories() {
-
-
     const { data: session } = useSession()
     const [suggestions, setSuggestions] = useState([])
     useEffect(() => {
@@ -12,7 +10,6 @@ function Stories() {
             ...faker.helpers.contextualCard(),
             id: i,
         }))
-
         setSuggestions(suggestions)
         console.log(suggestions)
     }, [])
@@ -31,7 +28,6 @@ function Stories() {
                     key={profile.id}
                     img={profile.avatar}
                     username={profile.username}
-
                 />
             ))}
         </div>
